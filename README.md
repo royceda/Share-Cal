@@ -1,2 +1,2 @@
 # Share-Cal
-ruby on rails application Shared calendar 
+ruby on rails application  Shared calendar 
