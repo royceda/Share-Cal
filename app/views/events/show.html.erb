@@ -1,0 +1,61 @@
+<hr/>
+<h1><%= @event.name %></h1>
+<h3><%= @event.description %></h3>
+
+<a href="/events">back</a>
+
+<div class="row">
+  <div class="col-sm-offset-3 col-sm-6">
+    <%= form_tag "/events/#{@event.id}", method: "patch" do %>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Title" value="<%= @event.name %>">
+        <small id="title" class="form-text text-muted">Event Name</small>
+      </div>
+
+      <div class="form-group">
+        <label for="repeat">Repeat</label>
+        <select class="form-control" id="reapeat">
+          <option>never</option>
+          <option>daily</option>
+          <option>Weekly</option>
+          <option>Monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="begin">Begin</label>
+        <input type="datepicker" class="form-control" name="begin" id="begin" value="<%= @event.begin %>"></input>
+      </div>
+
+
+      <div class="form-group">
+        <label for="begin">End</label>
+        <input type="datepicker" name="end" class="form-control" id="end" value="<%= @event.end %>"></input>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3"> <%= @event.description %></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Update</button>
+
+
+
+
+    </div>
+    <% end %>
+  </div>
+  <%= form_tag "/events/#{@event.id}", method: "delete" do %>
+  <input type="submit" class="btn btn-warning" value="Delete" />
+  <% end %>
+
+
+  <script>
+  $(function() {
+    $("#begin").datepicker({dateFormat: "dd/mm/yy", showAnim: "blind"});
+    $("#end").datepicker({dateFormat: "dd/mm/yy", showAnim: "blind"});
+  });
+  </script>

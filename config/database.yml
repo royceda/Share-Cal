@@ -1,0 +1,43 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+rct: &rct
+  adapter: mysql2
+  encoding: utf8
+  database: cal
+  username: root
+  password: root
+  host: 172.17.0.2
+  port: 3306
+
+
+
+#development:
+#  <<: *default
+#  database: db/development.sqlite3
+
+
+development:
+  <<: *rct
+  database: rails_calendar
+
+
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *rct
+  database: db/test.mysql2
+
+production:
+  <<: *rct
+  database: db/production.mysql2

@@ -1,0 +1,73 @@
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="jumbotron">
+      <h1>Events</h1>
+      <p><a class="btn btn-primary btn-lg" href="/events/new" role="button">Create an event</a></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <ul class="list-group">
+        <%  @events.each do |event| %>
+        <a class="list-group-item" href="/events/<%=event.id%>"><%=  event.name %>
+          <span class="badge">in <%= time_ago_in_words(event.begin) %></span>
+        </a>
+        <% end %>
+      </ul>
+    </div>
+
+
+    <div class="col-sm-6">
+      <%= form_tag "/events", method: "post" do %>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp" placeholder="Title">
+        <small id="title" class="form-text text-muted">Event Name</small>
+      </div>
+
+      <div class="form-group">
+        <label for="repeat">Repeat</label>
+        <select class="form-control" id="reapeat">
+          <option>never</option>
+          <option>daily</option>
+          <option>Weekly</option>
+          <option>Monthly</option>
+          <option>yearly</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="begin">Begin</label>
+        <input type="datepicker" class="form-control" name="begin" id="begin"></input>
+      </div>
+
+
+      <div class="form-group">
+        <label for="begin">End</label>
+        <input type="datepicker" name="end" class="form-control" id="end"></input>
+      </div>
+
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<script>
+  $(function() {
+    $("#begin").datepicker({dateFormat: "dd/mm/yy", showAnim: "blind"});
+    $("#end").datepicker({dateFormat: "dd/mm/yy", showAnim: "blind"});
+  });
+</script>
